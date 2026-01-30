@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screenshots - Build, Bin, Boost</title>
+  <meta name="description" content="Screenshots from Build, Bin, Boost — see the R&D portfolio simulation in action.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003da5;
+      --primary-light: #0056d6;
+      --primary-dark: #002d7a;
+      --primary-lighter: #e8f1fc;
+      --gold: #F1BE48;
+      --gold-dark: #D69A2D;
+      --gold-light: #fdf6e3;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-lighter) 100%);
+      color: var(--gray-700);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 1.3em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-brand img {
+      height: 36px;
+      width: auto;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+    /* Page Header */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.8em;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      font-size: 1.15em;
+      color: var(--gray-500);
+    }
+
+    /* Content */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* Screenshot Grid */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .screenshot-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .screenshot-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .screenshot-placeholder {
+      height: 220px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--gray-400);
+      font-size: 0.95em;
+      font-weight: 500;
+    }
+    .screenshot-card img {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .screenshot-card.wide {
+      grid-column: 1 / -1;
+    }
+    .screenshot-card.wide img {
+      max-height: 420px;
+      object-fit: cover;
+      object-position: top;
+    }
+    .screenshot-body {
+      padding: 20px 24px 24px;
+    }
+    .screenshot-body h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .screenshot-body p {
+      font-size: 0.9em;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--gray-200);
+      margin-top: 40px;
+      background: white;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--gray-500);
+    }
+    .footer-inner p { margin-bottom: 6px; }
+    .footer-name { color: var(--gray-700); font-weight: 600; }
+    .footer-link {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+    }
+    .footer-link:hover { color: var(--primary-light); }
+
+    /* License Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4em;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .modal p { font-size: 0.9em; color: var(--gray-600); margin-bottom: 12px; line-height: 1.6; }
+    .modal .cite { font-size: 0.85em; color: var(--gray-500); }
+    .btn-close {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    .btn-close:hover { background: var(--primary-light); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 2.2em; }
+      .screenshot-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 12px; font-size: 0.85em; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand"><img src="images/logo-icon.svg" alt="Logo">Build, Bin, Boost</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="screenshots.html" class="active">Screenshots</a>
+        <a href="how-to-play.html">How to Play</a>
+        <a href="educators.html">For Educators</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Screenshots</h1>
+    <p>See the simulation in action</p>
+  </div>
+
+  <div class="content">
+
+    <div class="screenshot-grid">
+
+      <div class="screenshot-card wide">
+        <img src="images/screenshot-intro.png" alt="Introduction screen showing your promotion to Head of R&D at ShieldTech India">
+        <div class="screenshot-body">
+          <h3>You've Been Promoted</h3>
+          <p>Take on the role of Head of R&amp;D at ShieldTech India. Download the case study, meet your CEO, and learn the board's four strategic priorities.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-committee-select.png" alt="Select committee members with different expertise and biases">
+        <div class="screenshot-body">
+          <h3>Select Your Committee</h3>
+          <p>Choose colleagues for your selection committee. Each brings different expertise, perspectives, and biases that shape which projects get attention.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-criteria.png" alt="Define evaluation criteria across technical, strategic, and commercial dimensions">
+        <div class="screenshot-body">
+          <h3>Define Evaluation Criteria</h3>
+          <p>Choose the factors you'll prioritise when evaluating project proposals: technical feasibility, strategic alignment, market size, and more.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-selection-process.png" alt="Configure how you will score projects and whether team info is visible">
+        <div class="screenshot-body">
+          <h3>Configure Your Selection Process</h3>
+          <p>Decide how thoroughly you'll evaluate proposals and whether to use blind review or show team information. Research insights inform each choice.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-legacy.png" alt="Current R&D portfolio with inherited projects in various states">
+        <div class="screenshot-body">
+          <h3>Legacy Portfolio</h3>
+          <p>Confront your predecessor's inherited projects. Review each project's status, spending, and alignment, then decide: continue, accelerate, or kill.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card wide">
+        <img src="images/screenshot-committee-dynamics.png" alt="Committee Dynamics mini-game with team members debating around a table">
+        <div class="screenshot-body">
+          <h3>Committee Dynamics Mini-Game</h3>
+          <p>Chair a live budget committee meeting. Manage energy, tension, and decision quality as members advocate, clash, and go quiet. Your facilitation determines the budget.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-portfolio.png" alt="Portfolio builder with bubble chart showing risk vs speed">
+        <div class="screenshot-body">
+          <h3>Build Your Portfolio</h3>
+          <p>Visualise your portfolio on a risk&ndash;speed matrix. Toggle projects in and out, monitor budget and strategic balance, and request extra funding from the board.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card wide">
+        <img src="images/screenshot-cockpit.png" alt="Project Cockpit showing tile view of all active projects with quarterly status">
+        <div class="screenshot-body">
+          <h3>Project Cockpit</h3>
+          <p>Monitor all active projects across eight quarters. Track progress, budget spend, and status at a glance. Manage each project: continue, accelerate, reduce, or kill.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-resource-run.png" alt="Resource Run mini-game with helicopter flying between buildings">
+        <div class="screenshot-body">
+          <h3>Resource Run Mini-Game</h3>
+          <p>Fly a supply helicopter between departments to deliver resources before Year 2. Complete sorties to unlock bonus budget for your second-year portfolio.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-results.png" alt="Final results scorecard with performance metrics and career outcome">
+        <div class="screenshot-body">
+          <h3>Final Results</h3>
+          <p>The board evaluates your leadership across selection accuracy, portfolio ROI, risk balance, strategic alignment, and management discipline. Discover your career outcome.</p>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <img src="images/screenshot-casestudy.png" alt="Professional case study PDF with abstract and key outcomes">
+        <div class="screenshot-body">
+          <h3>Downloadable Case Study</h3>
+          <p>Download a professional PDF summarising your two-year tenure: executive summary, portfolio decisions, scorecard, counterfactual analysis, and lessons learned.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-name">&copy; 2025 Ammon Salter</p>
+      <p>Ammon Salter, Warwick Business School</p>
+      <p>
+        Licensed under <button class="footer-link" onclick="document.getElementById('licenseModal').classList.add('visible')">CC BY-NC-SA 4.0</button> &middot;
+        Development assistance by Claude (Anthropic), GPT-5 (OpenAI), and Gemini (Google)
+      </p>
+    </div>
+  </footer>
+
+  <div id="licenseModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('visible')">
+    <div class="modal">
+      <h3>License &amp; Citation</h3>
+      <p>
+        This simulation is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" style="color: var(--primary);">Creative Commons BY-NC-SA 4.0</a>. You are free to use, adapt, and share for non-commercial educational purposes with attribution.
+      </p>
+      <p class="cite">
+        <strong>Cite as:</strong><br>
+        Salter, A. (2025). <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em> [Computer software]. Warwick Business School.
+      </p>
+      <button class="btn-close" onclick="document.getElementById('licenseModal').classList.remove('visible')">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>
