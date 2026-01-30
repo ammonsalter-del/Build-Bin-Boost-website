@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Educators - Build, Bin, Boost</title>
+  <meta name="description" content="How to use Build, Bin, Boost in your teaching — course integration, discussion questions, assessment ideas, and citation information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003da5;
+      --primary-light: #0056d6;
+      --primary-dark: #002d7a;
+      --primary-lighter: #e8f1fc;
+      --gold: #F1BE48;
+      --gold-dark: #D69A2D;
+      --gold-light: #fdf6e3;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --success: #059669;
+      --danger: #dc2626;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-lighter) 100%);
+      color: var(--gray-700);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 1.3em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-brand img {
+      height: 36px;
+      width: auto;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+    /* Page Header */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.6em;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .page-header .subtitle {
+      font-size: 1.15em;
+      color: var(--gray-500);
+      margin-bottom: 0;
+    }
+
+    /* Content */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      border: 1px solid var(--gray-200);
+    }
+    .card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .card p.intro {
+      color: var(--gray-600);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* Who Is It For - 2x2 grid */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .audience-item {
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid;
+    }
+    .audience-item h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 6px;
+    }
+    .audience-item p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+    .audience-blue { background: #e8f1fc; border-color: #d0e3f8; }
+    .audience-green { background: #d1fae5; border-color: #a7f3d0; }
+    .audience-purple { background: #e0e7ff; border-color: #c7d2fe; }
+    .audience-amber { background: var(--gold-light); border-color: #fde68a; }
+
+    /* How to Use - sub-sections */
+    .teaching-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .teaching-item {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--gray-200);
+    }
+    .teaching-item h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 8px;
+    }
+    .teaching-item p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* Discussion Questions */
+    .question-list {
+      list-style: none;
+      padding: 0;
+    }
+    .question-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--gray-700);
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    .question-list li + li {
+      border-top: 1px solid var(--gray-100);
+    }
+    .question-bullet {
+      color: var(--gold-dark);
+      font-size: 1.3em;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    /* Technical Requirements */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .tech-col h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 12px;
+    }
+    .tech-list {
+      list-style: none;
+      padding: 0;
+    }
+    .tech-list li {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 8px 0;
+      font-size: 0.9em;
+      color: var(--gray-600);
+    }
+    .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1.1em;
+      flex-shrink: 0;
+    }
+    .x-icon {
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 1.1em;
+      flex-shrink: 0;
+    }
+
+    /* Free & Open Source card */
+    .card-gold {
+      background: var(--gold-light);
+      border-color: var(--gold);
+    }
+    .card-gold h2 {
+      color: var(--gray-800);
+    }
+    .card-gold p {
+      color: var(--gray-700);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .card-gold p:last-child {
+      margin-bottom: 0;
+    }
+    .card-gold a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .card-gold a:hover {
+      color: var(--primary-light);
+    }
+
+    /* Citation */
+    .citation-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .citation-block {
+      background: var(--gray-50);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid var(--gray-200);
+    }
+    .citation-block h3 {
+      font-size: 0.85em;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .citation-block p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .citation-block pre {
+      font-size: 0.82em;
+      color: var(--gray-600);
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--gray-200);
+      margin-top: 40px;
+      background: white;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--gray-500);
+    }
+    .footer-inner p { margin-bottom: 6px; }
+    .footer-name { color: var(--gray-700); font-weight: 600; }
+    .footer-link {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+    }
+    .footer-link:hover { color: var(--primary-light); }
+
+    /* License Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4em;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .modal p { font-size: 0.9em; color: var(--gray-600); margin-bottom: 12px; line-height: 1.6; }
+    .modal .cite { font-size: 0.85em; color: var(--gray-500); }
+    .btn-close {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    .btn-close:hover { background: var(--primary-light); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 2em; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; gap: 24px; }
+      .nav-links { gap: 12px; font-size: 0.85em; }
+      .card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand"><img src="images/logo-icon.svg" alt="Logo">Build, Bin, Boost</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="screenshots.html">Screenshots</a>
+        <a href="how-to-play.html">How to Play</a>
+        <a href="educators.html" class="active">For Educators</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>For Educators</h1>
+    <p class="subtitle">Using Build, Bin, Boost in your teaching</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Who Is It For -->
+    <div class="card">
+      <h2>Who Is It For?</h2>
+      <p class="intro">Build, Bin, Boost is designed for business school teaching, particularly:</p>
+      <div class="audience-grid">
+        <div class="audience-item audience-blue">
+          <h3>Masters in Management</h3>
+          <p>Programmes covering innovation and technology strategy</p>
+        </div>
+        <div class="audience-item audience-green">
+          <h3>MBA Electives</h3>
+          <p>R&amp;D management and corporate entrepreneurship</p>
+        </div>
+        <div class="audience-item audience-purple">
+          <h3>Undergraduate Electives</h3>
+          <p>Innovation management, entrepreneurship, or technology strategy</p>
+        </div>
+        <div class="audience-item audience-amber">
+          <h3>Executive Education</h3>
+          <p>Programmes for R&amp;D leaders and product managers</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Objectives -->
+    <div class="card">
+      <h2>Learning Objectives</h2>
+      <p class="intro">Through gameplay, students learn to:</p>
+      <ul class="question-list">
+        <li><span class="question-bullet">&#8226;</span><span><strong>Design selection processes</strong> &mdash; Choose decision-making structures and evaluation approaches, understanding how process design affects outcomes</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Evaluate innovation proposals</strong> &mdash; Assess technical feasibility, market potential, strategic alignment, and team capability</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Balance portfolio risk</strong> &mdash; Mix incremental improvements with transformational bets to achieve strategic objectives</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Make tough resource allocation decisions</strong> &mdash; Categorise projects and allocate limited budgets across competing opportunities</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Manage portfolios actively over time</strong> &mdash; Decide when to persist with struggling projects and when to cut losses</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Navigate organisational dynamics</strong> &mdash; Handle real-world situations like team conflicts, budget pressures, competitor moves, and political considerations</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Recognise decision-making biases</strong> &mdash; Understand how committee composition, evaluation methods, and cognitive biases affect selection outcomes</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Assess the costs and benefits of using AI in decision-making</strong> &mdash; Explore how AI advice might shape decisions in R&amp;D project contexts</span></li>
+      </ul>
+    </div>
+
+    <!-- How to Use in Teaching -->
+    <div class="card">
+      <h2>How to Use in Teaching</h2>
+      <p class="intro">The simulation works well as:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Pre-Class Preparation</h3>
+          <p>Students play before a session on portfolio management, bringing their results and experiences to discussion. The downloadable case study PDF provides a ready-made artefact for class.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>In-Class Activity</h3>
+          <p>A 60&ndash;90 minute guided session where students play and then debrief together. Works well in computer labs or with students on their own laptops.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Assessment Component</h3>
+          <p>Students submit their downloaded case study PDF with reflection reports analysing their decisions and outcomes. The simulation generates unique results for each playthrough.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Group Exercise</h3>
+          <p>Teams play together, discussing and debating each decision. This mirrors real-world committee dynamics and adds a collaborative dimension to the learning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Play & Competition -->
+    <div class="card">
+      <h2>Team Play &amp; Competition</h2>
+      <p class="intro">Build, Bin, Boost works as both an individual and team activity. Here are several ways to introduce collaboration and competition:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Team-Based Play</h3>
+          <p>Assign students to teams of 3&ndash;5 and have them play the simulation together on a single screen. Teams must discuss and agree on each decision&mdash;which projects to fund, what to bin, and what to boost. This mirrors real-world R&amp;D committee dynamics and produces rich debate about risk, strategy, and resource allocation.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Competitive Tournaments</h3>
+          <p>Run the simulation as a class tournament. Each team (or individual) plays independently, then compare final scores&mdash;revenue generated, portfolio success rates, and board ratings. Rank teams on a leaderboard and discuss why different strategies led to different outcomes. This adds energy and motivation to the learning experience.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Role Assignment</h3>
+          <p>Within teams, assign roles that mirror real organisations: a Chief Technology Officer, a Finance Director, a Strategy Lead. Each role-holder advocates for decisions from their perspective, creating productive tension and forcing negotiation&mdash;just like real portfolio governance.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Cross-Team Debrief</h3>
+          <p>After play, have teams present their strategies and results to the class. Compare approaches: Did cautious teams outperform risk-takers? Did committee-based selectors beat individual decision-makers? The variation in outcomes provides rich material for discussion about portfolio management theory.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pairing with Case Studies -->
+    <div class="card">
+      <h2>Pairing with Case Studies</h2>
+      <p class="intro">The simulation is designed to complement traditional case-based teaching. Consider pairing it with:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Before a Case Discussion</h3>
+          <p>Have students play the simulation before studying a real-world R&amp;D portfolio case. Their gameplay experience gives them first-hand intuition about the trade-offs and pressures involved in project selection, making the case discussion more grounded and personal.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>After a Case Discussion</h3>
+          <p>Use the simulation to test whether students can apply lessons from the case. After analysing how a company managed its innovation portfolio, students play the simulation and reflect on whether they followed the same principles&mdash;or fell into the same traps.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Suggested Case Pairings</h3>
+          <p>The simulation pairs well with cases on R&amp;D portfolio management, stage-gate processes, innovation strategy, and corporate venturing. It is particularly effective alongside cases that explore how large firms manage project selection under uncertainty and organisational politics.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Reflective Comparison</h3>
+          <p>Ask students to write a short reflection comparing their simulation decisions to the case protagonist's choices. What did they do similarly? Where did they diverge? What does this reveal about their own decision-making biases?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discussion Questions -->
+    <div class="card">
+      <h2>Discussion Questions</h2>
+      <p class="intro">Suggested questions for classroom debrief:</p>
+      <ul class="question-list">
+        <li><span class="question-bullet">&#8226;</span><span>How did your selection process affect which projects got funded?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>What signals did you use to decide whether to continue or kill a project?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did you balance safe bets against riskier transformational projects?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>What would you do differently if you played again?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did committee composition and dynamics shape your decisions?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Did you find it harder to kill projects or to take risks on uncertain ones? Why?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did the board's strategic priorities constrain or guide your portfolio?</span></li>
+      </ul>
+    </div>
+
+    <!-- Technical Requirements -->
+    <div class="card">
+      <h2>Technical Requirements</h2>
+      <div class="tech-grid">
+        <div class="tech-col">
+          <h3>What You Need</h3>
+          <ul class="tech-list">
+            <li><span class="check-icon">&#10003;</span><span>Modern web browser (Chrome, Firefox, Safari, Edge)</span></li>
+            <li><span class="check-icon">&#10003;</span><span>Desktop or laptop (recommended)</span></li>
+            <li><span class="check-icon">&#10003;</span><span>Internet connection to load the page</span></li>
+          </ul>
+        </div>
+        <div class="tech-col">
+          <h3>What You Don't Need</h3>
+          <ul class="tech-list">
+            <li><span class="x-icon">&#10007;</span><span>No installation required</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No student accounts or logins</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No license fees</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No IT department involvement</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licence & Usage Rights -->
+    <div class="card card-gold">
+      <h2>Licence &amp; Usage Rights</h2>
+      <p>
+        Build, Bin, Boost is released under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> licence. This means:
+      </p>
+      <div class="teaching-sections" style="margin-top: 16px;">
+        <div class="teaching-item" style="background: white; border-color: var(--gold);">
+          <h3>You Are Free To</h3>
+          <ul class="tech-list">
+            <li><span class="check-icon">&#10003;</span><span><strong>Use</strong> &mdash; Play and deploy the simulation in your courses at no cost, with no per-student charges or institutional agreements</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Adapt</strong> &mdash; Modify the source code, change scenarios, add new projects, adjust parameters, or translate into other languages</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Share</strong> &mdash; Redistribute the original or your modified version to colleagues and other educators</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Host</strong> &mdash; Run your own copy on your institution&rsquo;s servers or learning management system</span></li>
+          </ul>
+        </div>
+        <div class="teaching-item" style="background: white; border-color: var(--gold);">
+          <h3>Under These Conditions</h3>
+          <ul class="tech-list">
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>Attribution</strong> &mdash; Give appropriate credit to the original author (Ammon Salter, Warwick Business School) and indicate if changes were made</span></li>
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>NonCommercial</strong> &mdash; You may not use the material for commercial purposes (selling access, including in paid training packages, etc.)</span></li>
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>ShareAlike</strong> &mdash; If you remix or build upon the simulation, you must distribute your contributions under the same CC BY-NC-SA 4.0 licence</span></li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 16px;">
+        <strong>No paperwork required.</strong> You do not need to contact us for permission to use the simulation in your teaching. Simply use it, cite it, and share any improvements with the community.
+      </p>
+    </div>
+
+    <!-- Customise & Develop New Versions -->
+    <div class="card">
+      <h2>Customise &amp; Develop New Versions</h2>
+      <p class="intro">Build, Bin, Boost is designed to be modified and extended. The entire simulation is a single HTML file with no server dependencies, making it straightforward to customise:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Modify the Scenario</h3>
+          <p>Change the company setting, industry context, or strategic priorities to match your teaching focus. The simulation&rsquo;s project database, event system, and scoring parameters are all configurable within the source code.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Add New Projects</h3>
+          <p>Create new R&amp;D project proposals that reflect specific industries, technologies, or innovation challenges relevant to your curriculum. Each project has attributes for feasibility, novelty, strategic alignment, and team capability.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Adjust Difficulty &amp; Parameters</h3>
+          <p>Tune the budget constraints, number of rounds, scoring weights, or event probabilities to create easier or more challenging versions for different student levels&mdash;from undergraduate introductions to executive masterclasses.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Build Discipline-Specific Versions</h3>
+          <p>Adapt the simulation for pharmaceutical R&amp;D, software product development, clean energy innovation, or any other sector. The modular design supports creating multiple variants from the same codebase.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Open Source & Community -->
+    <div class="card">
+      <h2>Open Source &amp; Community</h2>
+      <p class="intro">Build, Bin, Boost is an open-source project that welcomes contributions from educators, developers, and researchers worldwide:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Source Code on GitHub</h3>
+          <p>The full source code is available on <a href="https://github.com/ammonsalter-del/Build-Bin-Boost-website" style="color: var(--primary);">GitHub</a>. Fork the repository to start building your own version, or submit pull requests to improve the core simulation for everyone.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Community Contributions Welcome</h3>
+          <p>We encourage educators to share their adaptations, additional project scenarios, teaching guides, and assessment rubrics. By contributing back to the project, you help build a richer resource for the entire teaching community.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Report Issues &amp; Suggest Features</h3>
+          <p>Found a bug or have an idea for improvement? Open an issue on GitHub. We actively review feedback and incorporate community suggestions into future releases.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>No Technical Barriers</h3>
+          <p>The simulation is built entirely in HTML, CSS, and JavaScript&mdash;no frameworks, no build tools, no server required. Any web developer (or technically inclined educator) can read, understand, and modify the code. This deliberate simplicity lowers the barrier to community participation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Reading -->
+    <div class="card">
+      <h2>Background Reading</h2>
+      <p class="intro">Academic research that informed the simulation:</p>
+      <ul class="question-list">
+        <li><span class="question-bullet">&#8226;</span><span>Brasil, V.C. and Eggers, J.P. (2019). Product and innovation portfolio management. <em>Oxford Research Encyclopedia of Business and Management</em>.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Brasil, V.C., Salerno, M.S., Eggers, J.P. and Gomes, L.A.V. (2021). Boosting radical innovation using ambidextrous portfolio management. <em>Research-Technology Management</em>, 64(5), 39-49.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Boudreau, K.J., Guinan, E.C., Lakhani, K.R. and Riedl, C. (2016). Looking across and looking beyond the knowledge frontier. <em>Management Science</em>, 62(10), 2765-2783.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Cooper, R.G. and Sommer, A.F. (2023). Dynamic portfolio management for new product development. <em>Research-Technology Management</em>, 66(3), 19-31.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Criscuolo, P., Dahlander, L., Grohsjean, T. and Salter, A. (2017). Evaluating novelty: The role of panels in the selection of R&amp;D projects. <em>Academy of Management Journal</em>, 60(2), 433-460.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Criscuolo, P., Dahlander, L., Grohsjean, T. and Salter, A. (2021). The sequence effect on the selection of R&amp;D projects. <em>Organization Science</em>, 32(4), 1046-1067.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Dahlander, L., Beretta, M., Thomas, A., Kazemi, S., Fenger, M.H. and Frederiksen, L. (2023). Weeding out or picking winners in open innovation? <em>Research Policy</em>, 52(10), 104875.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Dahlander, L., Thomas, A., Wallin, M.W. and &Aring;ngstr&ouml;m, R.C. (2023). Blinded by the person? Experimental evidence from idea evaluation. <em>Strategic Management Journal</em>, 44(10), 2443-2459.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Kumar, A. and Operti, E. (2023). Missed chances and unfulfilled hopes. <em>Strategic Management Journal</em>, 44(13), 3067-3097.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Masucci, M., Parker, S.C., Brusoni, S. and Camerani, R. (2021). How are corporate ventures evaluated and selected? <em>Technovation</em>, 99, 102126.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Mount, M.P., Baer, M. and Lupoli, M.J. (2021). Quantum leaps or baby steps? <em>Strategic Management Journal</em>, 42(8), 1490-1515.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Sharapov, D. and Dahlander, L. (2025). Selection regimes and selection errors. <em>Organization Science</em>.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Si, H., Kavadias, S. and Loch, C. (2022). Managing innovation portfolios. <em>Production and Operations Management</em>, 31(12), 4572-4588.</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Wilden, R., Lin, N., Hohberger, J. and Randhawa, K. (2023). Selecting innovation projects. <em>Journal of Management Studies</em>, 60(7), 1720-1751.</span></li>
+      </ul>
+    </div>
+
+    <!-- How to Cite -->
+    <div class="card">
+      <h2>How to Cite</h2>
+      <p class="intro">If you use this simulation in your teaching or research:</p>
+      <div class="citation-blocks">
+        <div class="citation-block">
+          <h3>APA Style</h3>
+          <p>Salter, A. (2025). <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em> [Computer software]. Warwick Business School. https://buildbinboost.org</p>
+        </div>
+        <div class="citation-block">
+          <h3>Harvard Style</h3>
+          <p>Salter, A. (2025) <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em>. Available at: https://buildbinboost.org (Accessed: [date]).</p>
+        </div>
+        <div class="citation-block">
+          <h3>BibTeX</h3>
+          <pre>@software{salter2025buildbinboost,
+  author = {Salter, Ammon},
+  title = {Build, Bin, Boost: The R&D Portfolio Simulation},
+  year = {2025},
+  publisher = {Warwick Business School},
+  url = {https://buildbinboost.org}
+}</pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-name">&copy; 2025 Ammon Salter</p>
+      <p>Ammon Salter, Warwick Business School</p>
+      <p>
+        Licensed under <button class="footer-link" onclick="document.getElementById('licenseModal').classList.add('visible')">CC BY-NC-SA 4.0</button> &middot;
+        Development assistance by Claude (Anthropic), GPT-5 (OpenAI), and Gemini (Google)
+      </p>
+    </div>
+  </footer>
+
+  <div id="licenseModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('visible')">
+    <div class="modal">
+      <h3>License &amp; Citation</h3>
+      <p>
+        This simulation is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" style="color: var(--primary);">Creative Commons BY-NC-SA 4.0</a>. You are free to use, adapt, and share for non-commercial educational purposes with attribution.
+      </p>
+      <p class="cite">
+        <strong>Cite as:</strong><br>
+        Salter, A. (2025). <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em> [Computer software]. Warwick Business School.
+      </p>
+      <button class="btn-close" onclick="document.getElementById('licenseModal').classList.remove('visible')">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>
