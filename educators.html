@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Educators - Build, Bin, Boost</title>
+  <meta name="description" content="How to use Build, Bin, Boost in your teaching — course integration, discussion questions, assessment ideas, and citation information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #003da5;
+      --primary-light: #0056d6;
+      --primary-dark: #002d7a;
+      --primary-lighter: #e8f1fc;
+      --gold: #F1BE48;
+      --gold-dark: #D69A2D;
+      --gold-light: #fdf6e3;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --success: #059669;
+      --danger: #dc2626;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-lighter) 100%);
+      color: var(--gray-700);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 1.3em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-brand img {
+      height: 36px;
+      width: auto;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+
+    /* Page Header */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 10px;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.6em;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .page-header .subtitle {
+      font-size: 1.15em;
+      color: var(--gray-500);
+      margin-bottom: 0;
+    }
+
+    /* Content */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      border: 1px solid var(--gray-200);
+    }
+    .card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .card p.intro {
+      color: var(--gray-600);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* Who Is It For - 2x2 grid */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .audience-item {
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid;
+    }
+    .audience-item h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 6px;
+    }
+    .audience-item p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+    .audience-blue { background: #e8f1fc; border-color: #d0e3f8; }
+    .audience-green { background: #d1fae5; border-color: #a7f3d0; }
+    .audience-purple { background: #e0e7ff; border-color: #c7d2fe; }
+    .audience-amber { background: var(--gold-light); border-color: #fde68a; }
+
+    /* How to Use - sub-sections */
+    .teaching-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .teaching-item {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--gray-200);
+    }
+    .teaching-item h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 8px;
+    }
+    .teaching-item p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* Discussion Questions */
+    .question-list {
+      list-style: none;
+      padding: 0;
+    }
+    .question-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--gray-700);
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    .question-list li + li {
+      border-top: 1px solid var(--gray-100);
+    }
+    .question-bullet {
+      color: var(--gold-dark);
+      font-size: 1.3em;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    /* Technical Requirements */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .tech-col h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 12px;
+    }
+    .tech-list {
+      list-style: none;
+      padding: 0;
+    }
+    .tech-list li {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 8px 0;
+      font-size: 0.9em;
+      color: var(--gray-600);
+    }
+    .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1.1em;
+      flex-shrink: 0;
+    }
+    .x-icon {
+      color: var(--danger);
+      font-weight: 700;
+      font-size: 1.1em;
+      flex-shrink: 0;
+    }
+
+    /* Free & Open Source card */
+    .card-gold {
+      background: var(--gold-light);
+      border-color: var(--gold);
+    }
+    .card-gold h2 {
+      color: var(--gray-800);
+    }
+    .card-gold p {
+      color: var(--gray-700);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .card-gold p:last-child {
+      margin-bottom: 0;
+    }
+    .card-gold a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .card-gold a:hover {
+      color: var(--primary-light);
+    }
+
+    /* Citation */
+    .citation-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .citation-block {
+      background: var(--gray-50);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid var(--gray-200);
+    }
+    .citation-block h3 {
+      font-size: 0.85em;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .citation-block p {
+      font-size: 0.9em;
+      color: var(--gray-600);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .citation-block pre {
+      font-size: 0.82em;
+      color: var(--gray-600);
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--gray-200);
+      margin-top: 40px;
+      background: white;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--gray-500);
+    }
+    .footer-inner p { margin-bottom: 6px; }
+    .footer-name { color: var(--gray-700); font-weight: 600; }
+    .footer-link {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+    }
+    .footer-link:hover { color: var(--primary-light); }
+
+    /* License Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4em;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .modal p { font-size: 0.9em; color: var(--gray-600); margin-bottom: 12px; line-height: 1.6; }
+    .modal .cite { font-size: 0.85em; color: var(--gray-500); }
+    .btn-close {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    .btn-close:hover { background: var(--primary-light); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 2em; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; gap: 24px; }
+      .nav-links { gap: 12px; font-size: 0.85em; }
+      .card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand"><img src="images/logo-icon.svg" alt="Logo">Build, Bin, Boost</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="screenshots.html">Screenshots</a>
+        <a href="how-to-play.html">How to Play</a>
+        <a href="educators.html" class="active">For Educators</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>For Educators</h1>
+    <p class="subtitle">Using Build, Bin, Boost in your teaching</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Who Is It For -->
+    <div class="card">
+      <h2>Who Is It For?</h2>
+      <p class="intro">Build, Bin, Boost is designed for business school teaching, particularly:</p>
+      <div class="audience-grid">
+        <div class="audience-item audience-blue">
+          <h3>Masters in Management</h3>
+          <p>Programmes covering innovation and technology strategy</p>
+        </div>
+        <div class="audience-item audience-green">
+          <h3>MBA Electives</h3>
+          <p>R&amp;D management and corporate entrepreneurship</p>
+        </div>
+        <div class="audience-item audience-purple">
+          <h3>Undergraduate Electives</h3>
+          <p>Innovation management, entrepreneurship, or technology strategy</p>
+        </div>
+        <div class="audience-item audience-amber">
+          <h3>Executive Education</h3>
+          <p>Programmes for R&amp;D leaders and product managers</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Objectives -->
+    <div class="card">
+      <h2>Learning Objectives</h2>
+      <p class="intro">Through gameplay, students learn to:</p>
+      <ul class="question-list">
+        <li><span class="question-bullet">&#8226;</span><span><strong>Design selection processes</strong> &mdash; Choose decision-making structures and evaluation approaches, understanding how process design affects outcomes</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Evaluate innovation proposals</strong> &mdash; Assess technical feasibility, market potential, strategic alignment, and team capability</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Balance portfolio risk</strong> &mdash; Mix incremental improvements with transformational bets to achieve strategic objectives</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Make tough resource allocation decisions</strong> &mdash; Categorise projects and allocate limited budgets across competing opportunities</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Manage portfolios actively over time</strong> &mdash; Decide when to persist with struggling projects and when to cut losses</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Navigate organisational dynamics</strong> &mdash; Handle real-world situations like team conflicts, budget pressures, competitor moves, and political considerations</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Recognise decision-making biases</strong> &mdash; Understand how committee composition, evaluation methods, and cognitive biases affect selection outcomes</span></li>
+        <li><span class="question-bullet">&#8226;</span><span><strong>Assess the costs and benefits of using AI in decision-making</strong> &mdash; Explore how AI advice might shape decisions in R&amp;D project contexts</span></li>
+      </ul>
+    </div>
+
+    <!-- Concepts Explored in the Simulation -->
+    <div class="card">
+      <h2>Concepts Explored in the Simulation</h2>
+      <p class="intro">The game exposes students to 20 core concepts from innovation management, strategy, and behavioural decision-making. Click any concept to learn more.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 16px;">
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c1').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">R&amp;D Portfolio Management</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">The core challenge of the simulation</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c2').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Portfolio Balance</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Incremental vs. transformational</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c3').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Strategic Alignment</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Matching investments to priorities</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c4').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Technology Readiness Levels</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">The TRL 1&ndash;9 scale</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c5').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Multi-Criteria Decision Analysis</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Weighted scoring with trade-offs</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c6').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Stage-Gate Review</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Quarterly go/no-go decisions</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c7').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Active Portfolio Tending</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Build, Bin, or Boost</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c8').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Kill Discipline</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Knowing when to terminate</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c9').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Sunk Cost Fallacy</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Past spending vs. future value</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c10').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Escalation of Commitment</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Throwing good money after bad</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c11').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Selection Bias &amp; Blind Review</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Person bias in evaluation</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c12').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Committee Composition</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">How panels shape outcomes</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c13').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Exploitation vs. Exploration</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Organisational ambidexterity</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c14').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Resource Allocation</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Fixed budgets, competing demands</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c15').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Selection Errors</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">False positives vs. false negatives</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c16').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">ROI &amp; Financial Discipline</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Returns vs. long-term bets</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c17').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Bootleg / Skunk Works</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Grassroots innovation from teams</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c18').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">AI-Augmented Decision Making</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">When to trust the algorithm</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c19').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Organisational Politics</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Stakeholders, agendas, pet projects</span>
+        </button>
+
+        <button onclick="document.getElementById('conceptModal').innerHTML=document.getElementById('c20').innerHTML;document.getElementById('conceptOverlay').classList.add('visible');" style="background: var(--primary-lighter); border: 1px solid #d0e3f8; border-radius: 10px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; font-family: inherit; font-size: 0.9em; color: var(--gray-700);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='none';this.style.boxShadow='none';">
+          <strong style="color: var(--primary);">Counterfactual Analysis</strong><br><span style="font-size: 0.85em; color: var(--gray-500);">Learning from the road not taken</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Concept Detail Popup -->
+    <div id="conceptOverlay" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('visible')">
+      <div class="modal" id="conceptModal" style="max-width: 600px; max-height: 80vh; overflow-y: auto;"></div>
+    </div>
+
+    <!-- Hidden concept content -->
+    <div style="display:none;">
+      <div id="c1">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">R&amp;D Portfolio Management</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">The discipline of selecting, funding, and managing a collection of innovation projects to achieve strategic objectives. Rather than evaluating projects in isolation, portfolio management considers how projects interact, compete for resources, and collectively balance risk and reward.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students manage an entire R&amp;D portfolio over two years, making selection, funding, and termination decisions while responding to market events and board expectations.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c2">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Portfolio Balance</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A well-managed portfolio balances <strong>incremental</strong> projects (safer, shorter-term returns) with <strong>transformational</strong> projects (riskier, but potentially breakthrough). Portfolios that are too conservative miss opportunities; those that are too aggressive risk catastrophic failure.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> The board evaluates portfolio composition. Scoring penalises portfolios that are over 80% incremental or over 80% transformational, and rewards a balanced mix.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c3">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Strategic Alignment &amp; Bucket Allocation</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Organisations typically define strategic priorities and allocate R&amp;D spending across &ldquo;buckets&rdquo; that reflect those priorities. Strategic alignment ensures innovation investments serve the organisation&rsquo;s direction, not just individual project merit.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> The board sets four strategic priorities. Students receive bonuses for covering all buckets and penalties for over-concentrating in one area.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c4">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Technology Readiness Levels (TRLs)</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A 1&ndash;9 scale originally developed by NASA to assess the maturity of a technology, from basic research (TRL 1) through to production-ready systems (TRL 9). TRLs help decision-makers understand how much development risk remains and how far a project is from market.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Every project displays its current and target TRL. Lower TRLs indicate higher technical risk but potentially greater novelty. Students learn to factor technology maturity into investment decisions.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c5">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Multi-Criteria Decision Analysis</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A structured approach to evaluating options against multiple criteria, each carrying a different weight. The choice of criteria and their weights shapes which projects score highest&mdash;and which get overlooked. Every criterion has trade-offs: what it catches and what it misses.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students select from 15 criteria across technical, strategic, market, and financial categories, then assign weights. End-game analysis reveals how their criteria choices systematically biased their portfolio.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c6">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Stage-Gate Review</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A project management approach where projects pass through a series of &ldquo;gates&rdquo;&mdash;formal review points where decision-makers evaluate progress and decide whether to continue, modify, or terminate. Stage-gates impose discipline on the innovation process and create structured moments for portfolio tending.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Each quarter serves as a gate. Students receive traffic-light status updates and must decide whether to continue, reduce, or kill each project based on the signals.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c7">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Active Portfolio Tending</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Portfolio management is not a one-time selection exercise. It requires ongoing attention&mdash;monitoring projects, reallocating resources, accelerating winners, and cutting losers. The &ldquo;Build, Bin, Boost&rdquo; framework captures the three core actions: invest in promising projects, terminate underperformers, and accelerate breakthroughs.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students who passively let projects run receive lower scores. Active management decisions&mdash;continuing, reducing, boosting, or killing&mdash;are tracked and rewarded.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c8">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Kill Discipline</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">One of the hardest skills in innovation management. Organisations routinely keep failing projects alive too long due to sunk costs, political pressure, or optimism bias. Good kill discipline means terminating projects early when the signals warrant it, freeing resources for more promising work.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Kill decisions are scored based on timing and project type. Killing a failing incremental project early earns points; killing a transformational project too hastily is penalised. The end-game reveals which kills were correct.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c9">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Sunk Cost Fallacy</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">The tendency to continue investing in a project because of previously invested resources (time, money, effort) rather than evaluating it on its future prospects alone. Past spending is irrecoverable and should not influence forward-looking decisions&mdash;but in practice, it often does.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students inherit legacy projects with millions already spent. The display shows &ldquo;sunk cost&rdquo; figures, forcing students to confront whether past spending should influence their decision to continue or kill.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c10">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Escalation of Commitment</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A pattern where decision-makers increase their investment in a failing course of action, often because admitting failure threatens their reputation or status. Related to sunk cost fallacy but also driven by ego, political pressure, and organisational inertia.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Several legacy projects come with political baggage&mdash;the CTO staked his reputation on one, a VP championed another. Killing them means writing off millions and damaging relationships, creating realistic escalation pressure.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c11">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Selection Bias &amp; Blind Review</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Evaluators may unconsciously favour or penalise project proposals based on the identity, reputation, or track record of the proposing team rather than the idea itself. Blind review&mdash;hiding team information during evaluation&mdash;is one mechanism for reducing this &ldquo;person bias.&rdquo;</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students can choose to enable blind review, hiding team details during project evaluation. The end-game analysis reveals whether blinding changed their selection patterns.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c12">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Committee Composition &amp; Collective Bias</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Who sits on the evaluation panel determines what gets funded. Each committee member brings their own expertise, preferences, and blind spots. A finance-heavy panel may undervalue exploration; a technology-heavy panel may overlook market fit. The composition of the panel is itself a strategic decision.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students assemble an evaluation committee from staff members with explicitly defined biases and scoring effects. The end-game reveals how committee composition shaped the portfolio.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c13">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Exploitation vs. Exploration</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">A central tension in innovation strategy. <strong>Exploitation</strong> means refining and optimising existing capabilities for short-term returns. <strong>Exploration</strong> means searching for new knowledge and opportunities with uncertain payoffs. Ambidextrous organisations manage to do both simultaneously.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Portfolios that are all exploitation (incremental projects) receive career penalties. The board expects a mix that includes exploratory, transformational investments alongside safe bets.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c14">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Resource Allocation Under Constraints</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">In the real world, R&amp;D budgets are finite. Every project funded means another project is not. Resource allocation is a zero-sum exercise that forces explicit trade-offs between competing opportunities, making prioritisation essential.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Students operate within a fixed annual budget. They can request extra funding from the CEO, but doing so raises the performance bar they will be evaluated against.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c15">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Selection Errors (Type I &amp; Type II)</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Two types of selection error carry different costs. A <strong>false positive</strong> (Type I) means funding a project that fails&mdash;wasting investment. A <strong>false negative</strong> (Type II) means rejecting a project that would have succeeded&mdash;a missed opportunity. Most organisations focus on avoiding false positives, but false negatives are often more costly in the long run.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> The scoring system tracks both error types. End-game counterfactual analysis reveals which rejected projects would have been winners, making the cost of missed opportunities concrete.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c16">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">ROI &amp; Financial Discipline</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Return on investment is a critical metric for R&amp;D evaluation, but over-reliance on financial projections can kill ambitious long-term bets. Early-stage projects have highly uncertain returns, and strict ROI thresholds systematically bias portfolios toward incremental, predictable projects.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> ROI is one of six board evaluation dimensions. Students who over-weight financial criteria may achieve short-term returns but miss transformational opportunities, resulting in lower career outcomes.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c17">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Bootleg / Skunk Works Innovation</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Not all innovation comes through formal channels. &ldquo;Bootleg&rdquo; or &ldquo;skunk works&rdquo; projects are unofficial initiatives developed by teams working outside the sanctioned process, often using spare time or diverted resources. These grassroots efforts can produce breakthroughs that formal processes miss, but they also bypass governance.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Team members occasionally pitch unauthorised projects they have been developing informally. Students must decide whether to bring these bootleg innovations into the official portfolio or shut them down.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c18">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">AI-Augmented Decision Making</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">AI tools can assist R&amp;D decision-making by analysing patterns in historical data to score and rank projects. However, AI systems have systematic biases&mdash;they overweight quantifiable metrics, display false precision, and struggle to evaluate genuinely novel ideas that lack historical precedent.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> The optional AI advisor &ldquo;Devi&rdquo; provides project scores and recommendations. End-game analysis compares AI accuracy to the student&rsquo;s own accuracy, revealing when algorithmic advice helps and when it misleads.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c19">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Organisational Politics &amp; Stakeholder Management</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Innovation decisions do not happen in a vacuum. Executives champion pet projects, teams lobby for their proposals, and budget decisions carry political consequences. Effective R&amp;D leaders must navigate these dynamics while maintaining analytical rigour.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> Legacy projects come with political context&mdash;VP-championed initiatives, CTO reputation stakes, orphaned pet projects. Dilemma events arrive from above, below, and across the organisation, forcing students to balance analytical judgment with political reality.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+      <div id="c20">
+        <h3 style="color: var(--primary); margin-bottom: 12px;">Counterfactual Analysis</h3>
+        <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 12px;">Understanding what <em>would</em> have happened is as important as understanding what <em>did</em> happen. Counterfactual analysis examines the outcomes of decisions not taken&mdash;projects rejected, projects killed, opportunities passed over. This reveals hidden costs of selection processes and biases that are invisible when looking only at funded projects.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; line-height: 1.6;"><strong>In the game:</strong> The end-game reveals the fate of every project&mdash;including those the student rejected or killed. Students see which rejected proposals would have succeeded and which funded projects would have failed regardless, enabling a full accounting of their decision quality.</p>
+        <button class="btn-close" onclick="document.getElementById('conceptOverlay').classList.remove('visible')">Close</button>
+      </div>
+    </div>
+
+    <!-- How to Use in Teaching -->
+    <div class="card">
+      <h2>How to Use in Teaching</h2>
+      <p class="intro">The simulation works well as:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Pre-Class Preparation</h3>
+          <p>Students play before a session on portfolio management, bringing their results and experiences to discussion. The downloadable case study PDF provides a ready-made artefact for class.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>In-Class Activity</h3>
+          <p>A 60&ndash;90 minute guided session where students play and then debrief together. Works well in computer labs or with students on their own laptops.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Assessment Component</h3>
+          <p>Students submit their downloaded case study PDF with reflection reports analysing their decisions and outcomes. The simulation generates unique results for each playthrough.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Group Exercise</h3>
+          <p>Teams play together, discussing and debating each decision. This mirrors real-world committee dynamics and adds a collaborative dimension to the learning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Play & Competition -->
+    <div class="card">
+      <h2>Team Play &amp; Competition</h2>
+      <p class="intro">Build, Bin, Boost works as both an individual and team activity. Here are several ways to introduce collaboration and competition:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Team-Based Play</h3>
+          <p>Assign students to teams of 3&ndash;5 and have them play the simulation together on a single screen. Teams must discuss and agree on each decision&mdash;which projects to fund, what to bin, and what to boost. This mirrors real-world R&amp;D committee dynamics and produces rich debate about risk, strategy, and resource allocation.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Competitive Tournaments</h3>
+          <p>Run the simulation as a class tournament. Each team (or individual) plays independently, then compare final scores&mdash;revenue generated, portfolio success rates, and board ratings. Rank teams on a leaderboard and discuss why different strategies led to different outcomes. This adds energy and motivation to the learning experience.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Role Assignment</h3>
+          <p>Within teams, assign roles that mirror real organisations: a Chief Technology Officer, a Finance Director, a Strategy Lead. Each role-holder advocates for decisions from their perspective, creating productive tension and forcing negotiation&mdash;just like real portfolio governance.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Cross-Team Debrief</h3>
+          <p>After play, have teams present their strategies and results to the class. Compare approaches: Did cautious teams outperform risk-takers? Did committee-based selectors beat individual decision-makers? The variation in outcomes provides rich material for discussion about portfolio management theory.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pairing with Case Studies -->
+    <div class="card">
+      <h2>Pairing with Case Studies</h2>
+      <p class="intro">The simulation is designed to complement traditional case-based teaching. Consider pairing it with:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Before a Case Discussion</h3>
+          <p>Have students play the simulation before studying a real-world R&amp;D portfolio case. Their gameplay experience gives them first-hand intuition about the trade-offs and pressures involved in project selection, making the case discussion more grounded and personal.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>After a Case Discussion</h3>
+          <p>Use the simulation to test whether students can apply lessons from the case. After analysing how a company managed its innovation portfolio, students play the simulation and reflect on whether they followed the same principles&mdash;or fell into the same traps.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Suggested Case Pairings</h3>
+          <p>The simulation pairs well with cases on R&amp;D portfolio management, stage-gate processes, innovation strategy, and corporate venturing. It is particularly effective alongside cases that explore how large firms manage project selection under uncertainty and organisational politics.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Reflective Comparison</h3>
+          <p>Ask students to write a short reflection comparing their simulation decisions to the case protagonist's choices. What did they do similarly? Where did they diverge? What does this reveal about their own decision-making biases?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discussion Questions -->
+    <div class="card">
+      <h2>Discussion Questions</h2>
+      <p class="intro">Suggested questions for classroom debrief:</p>
+      <ul class="question-list">
+        <li><span class="question-bullet">&#8226;</span><span>How did your selection process affect which projects got funded?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>What signals did you use to decide whether to continue or kill a project?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did you balance safe bets against riskier transformational projects?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>What would you do differently if you played again?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did committee composition and dynamics shape your decisions?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>Did you find it harder to kill projects or to take risks on uncertain ones? Why?</span></li>
+        <li><span class="question-bullet">&#8226;</span><span>How did the board's strategic priorities constrain or guide your portfolio?</span></li>
+      </ul>
+    </div>
+
+    <!-- Technical Requirements -->
+    <div class="card">
+      <h2>Technical Requirements</h2>
+      <div class="tech-grid">
+        <div class="tech-col">
+          <h3>What You Need</h3>
+          <ul class="tech-list">
+            <li><span class="check-icon">&#10003;</span><span>Modern web browser (Chrome, Firefox, Safari, Edge)</span></li>
+            <li><span class="check-icon">&#10003;</span><span>Desktop or laptop (recommended)</span></li>
+            <li><span class="check-icon">&#10003;</span><span>Internet connection to load the page</span></li>
+          </ul>
+        </div>
+        <div class="tech-col">
+          <h3>What You Don't Need</h3>
+          <ul class="tech-list">
+            <li><span class="x-icon">&#10007;</span><span>No installation required</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No student accounts or logins</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No license fees</span></li>
+            <li><span class="x-icon">&#10007;</span><span>No IT department involvement</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licence & Usage Rights -->
+    <div class="card card-gold">
+      <h2>Licence &amp; Usage Rights</h2>
+      <p>
+        Build, Bin, Boost is released under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a> licence. This means:
+      </p>
+      <div class="teaching-sections" style="margin-top: 16px;">
+        <div class="teaching-item" style="background: white; border-color: var(--gold);">
+          <h3>You Are Free To</h3>
+          <ul class="tech-list">
+            <li><span class="check-icon">&#10003;</span><span><strong>Use</strong> &mdash; Play and deploy the simulation in your courses at no cost, with no per-student charges or institutional agreements</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Adapt</strong> &mdash; Modify the source code, change scenarios, add new projects, adjust parameters, or translate into other languages</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Share</strong> &mdash; Redistribute the original or your modified version to colleagues and other educators</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Host</strong> &mdash; Run your own copy on your institution&rsquo;s servers or learning management system</span></li>
+          </ul>
+        </div>
+        <div class="teaching-item" style="background: white; border-color: var(--gold);">
+          <h3>Under These Conditions</h3>
+          <ul class="tech-list">
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>Attribution</strong> &mdash; Give appropriate credit to the original author (Ammon Salter, Warwick Business School, University of Warwick) and indicate if changes were made</span></li>
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>NonCommercial</strong> &mdash; You may not use the material for commercial purposes (selling access, including in paid training packages, etc.)</span></li>
+            <li><span class="question-bullet" style="font-size: 1em;">&#9432;</span><span><strong>ShareAlike</strong> &mdash; If you remix or build upon the simulation, you must distribute your contributions under the same CC BY-NC-SA 4.0 licence</span></li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 16px;">
+        <strong>No paperwork required.</strong> You do not need to contact us for permission to use the simulation in your teaching. Simply use it, cite it, and share any improvements with the community.
+      </p>
+    </div>
+
+    <!-- Customise & Develop New Versions -->
+    <div class="card">
+      <h2>Customise &amp; Develop New Versions</h2>
+      <p class="intro">Build, Bin, Boost is designed to be modified and extended. The entire simulation is a single HTML file with no server dependencies, making it straightforward to customise:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Modify the Scenario</h3>
+          <p>Change the company setting, industry context, or strategic priorities to match your teaching focus. The simulation&rsquo;s project database, event system, and scoring parameters are all configurable within the source code.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Add New Projects</h3>
+          <p>Create new R&amp;D project proposals that reflect specific industries, technologies, or innovation challenges relevant to your curriculum. Each project has attributes for feasibility, novelty, strategic alignment, and team capability.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Adjust Difficulty &amp; Parameters</h3>
+          <p>Tune the budget constraints, number of rounds, scoring weights, or event probabilities to create easier or more challenging versions for different student levels&mdash;from undergraduate introductions to executive masterclasses.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Build Discipline-Specific Versions</h3>
+          <p>Adapt the simulation for pharmaceutical R&amp;D, software product development, clean energy innovation, or any other sector. The modular design supports creating multiple variants from the same codebase.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Open Source & Community -->
+    <div class="card">
+      <h2>Open Source &amp; Community</h2>
+      <p class="intro">Build, Bin, Boost is an open-source project that welcomes contributions from educators, developers, and researchers worldwide:</p>
+      <div class="teaching-sections">
+        <div class="teaching-item">
+          <h3>Source Code on GitHub</h3>
+          <p>The full source code is available on <a href="https://github.com/ammonsalter-del/built-bin-boost" style="color: var(--primary);">GitHub</a>. Fork the repository to start building your own version, or submit pull requests to improve the core simulation for everyone.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Community Contributions Welcome</h3>
+          <p>We encourage educators to share their adaptations, additional project scenarios, teaching guides, and assessment rubrics. By contributing back to the project, you help build a richer resource for the entire teaching community.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>Report Issues &amp; Suggest Features</h3>
+          <p>Found a bug or have an idea for improvement? Open an issue on GitHub. We actively review feedback and incorporate community suggestions into future releases.</p>
+        </div>
+        <div class="teaching-item">
+          <h3>No Technical Barriers</h3>
+          <p>The simulation is built entirely in HTML, CSS, and JavaScript&mdash;no frameworks, no build tools, no server required. Any web developer (or technically inclined educator) can read, understand, and modify the code. This deliberate simplicity lowers the barrier to community participation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Reading (Collapsible) -->
+    <div class="card">
+      <h2>Background Reading</h2>
+      <p class="intro">Academic research that informed the simulation.</p>
+      <details style="margin-top: 12px;">
+        <summary style="cursor: pointer; font-weight: 600; color: var(--primary); padding: 10px 0; user-select: none; list-style: none; display: flex; align-items: center; gap: 8px;">
+          <span class="references-arrow" style="display: inline-block; transition: transform 0.2s;">&#9654;</span> View 14 references
+        </summary>
+        <ul class="question-list" style="margin-top: 8px;">
+          <li><span class="question-bullet">&#8226;</span><span>Brasil, V.C. and Eggers, J.P. (2019). Product and innovation portfolio management. <em>Oxford Research Encyclopedia of Business and Management</em>.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Brasil, V.C., Salerno, M.S., Eggers, J.P. and Gomes, L.A.V. (2021). Boosting radical innovation using ambidextrous portfolio management. <em>Research-Technology Management</em>, 64(5), 39-49.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Boudreau, K.J., Guinan, E.C., Lakhani, K.R. and Riedl, C. (2016). Looking across and looking beyond the knowledge frontier. <em>Management Science</em>, 62(10), 2765-2783.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Cooper, R.G. and Sommer, A.F. (2023). Dynamic portfolio management for new product development. <em>Research-Technology Management</em>, 66(3), 19-31.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Criscuolo, P., Dahlander, L., Grohsjean, T. and Salter, A. (2017). Evaluating novelty: The role of panels in the selection of R&amp;D projects. <em>Academy of Management Journal</em>, 60(2), 433-460.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Criscuolo, P., Dahlander, L., Grohsjean, T. and Salter, A. (2021). The sequence effect on the selection of R&amp;D projects. <em>Organization Science</em>, 32(4), 1046-1067.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Dahlander, L., Beretta, M., Thomas, A., Kazemi, S., Fenger, M.H. and Frederiksen, L. (2023). Weeding out or picking winners in open innovation? <em>Research Policy</em>, 52(10), 104875.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Dahlander, L., Thomas, A., Wallin, M.W. and &Aring;ngstr&ouml;m, R.C. (2023). Blinded by the person? Experimental evidence from idea evaluation. <em>Strategic Management Journal</em>, 44(10), 2443-2459.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Kumar, A. and Operti, E. (2023). Missed chances and unfulfilled hopes. <em>Strategic Management Journal</em>, 44(13), 3067-3097.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Masucci, M., Parker, S.C., Brusoni, S. and Camerani, R. (2021). How are corporate ventures evaluated and selected? <em>Technovation</em>, 99, 102126.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Mount, M.P., Baer, M. and Lupoli, M.J. (2021). Quantum leaps or baby steps? <em>Strategic Management Journal</em>, 42(8), 1490-1515.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Sharapov, D. and Dahlander, L. (2025). Selection regimes and selection errors. <em>Organization Science</em>.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Si, H., Kavadias, S. and Loch, C. (2022). Managing innovation portfolios. <em>Production and Operations Management</em>, 31(12), 4572-4588.</span></li>
+          <li><span class="question-bullet">&#8226;</span><span>Wilden, R., Lin, N., Hohberger, J. and Randhawa, K. (2023). Selecting innovation projects. <em>Journal of Management Studies</em>, 60(7), 1720-1751.</span></li>
+        </ul>
+      </details>
+      <style>
+        details[open] .references-arrow { transform: rotate(90deg); }
+      </style>
+    </div>
+
+    <!-- How to Cite -->
+    <div class="card">
+      <h2>How to Cite</h2>
+      <p class="intro">If you use this simulation in your teaching or research:</p>
+      <div class="citation-blocks">
+        <div class="citation-block">
+          <h3>APA Style</h3>
+          <p>Salter, A. (2025). <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em> [Computer software]. Warwick Business School, University of Warwick. https://buildbinboost.org</p>
+        </div>
+        <div class="citation-block">
+          <h3>Harvard Style</h3>
+          <p>Salter, A. (2025) <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em>. Warwick Business School, University of Warwick. Available at: https://buildbinboost.org (Accessed: [date]).</p>
+        </div>
+        <div class="citation-block">
+          <h3>BibTeX</h3>
+          <pre>@software{salter2025buildbinboost,
+  author = {Salter, Ammon},
+  title = {Build, Bin, Boost: The R&D Portfolio Simulation},
+  year = {2025},
+  publisher = {Warwick Business School, University of Warwick},
+  url = {https://buildbinboost.org}
+}</pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-name">&copy; 2025 Ammon Salter</p>
+      <p>Ammon Salter, Warwick Business School, University of Warwick</p>
+      <p>
+        Licensed under <button class="footer-link" onclick="document.getElementById('licenseModal').classList.add('visible')">CC BY-NC-SA 4.0</button> &middot;
+        Development assistance by Claude (Anthropic), GPT-5 (OpenAI), and Gemini (Google)
+      </p>
+    </div>
+  </footer>
+
+  <div id="licenseModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('visible')">
+    <div class="modal">
+      <h3>License &amp; Citation</h3>
+      <p>
+        This simulation is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" style="color: var(--primary);">Creative Commons BY-NC-SA 4.0</a>. You are free to use, adapt, and share for non-commercial educational purposes with attribution.
+      </p>
+      <p class="cite">
+        <strong>Cite as:</strong><br>
+        Salter, A. (2025). <em>Build, Bin, Boost: The R&amp;D Portfolio Simulation</em> [Computer software]. Warwick Business School, University of Warwick.
+      </p>
+      <button class="btn-close" onclick="document.getElementById('licenseModal').classList.remove('visible')">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>
